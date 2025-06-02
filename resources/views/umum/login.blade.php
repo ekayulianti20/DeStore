@@ -30,7 +30,7 @@
       background-color: #ffffff;
       max-width: 1100px;
       width: 100%;
-      margin: 40px 40px;
+      margin-top: 75px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
