@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Aplikasi Penjualan</title>
+  <title>DeStore</title>
+  <link rel="icon" href="{{ asset('img/logo2.png') }}" type="image/png">
 
   <!-- Bulma CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
