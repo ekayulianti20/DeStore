@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
@@ -38,3 +39,8 @@ Route::post('/login', function (Request $request) {
 
     return back()->with('error', 'Username atau password salah.');
 })->name('login');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');

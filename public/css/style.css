@@ -5,7 +5,8 @@
     height: 100%;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -24,6 +25,7 @@ html, body {
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .sidebar .header {
@@ -157,6 +159,146 @@ html, body {
 }
 
 .main-content {
-    background-color: #701515;
+    background-color: #FFFFFF;
     flex-grow: 1;
 }
+
+.dash-container {
+    margin-top: 20px;
+    color: #34495E;
+}
+
+.dash-container a {
+    text-decoration: none;
+}
+
+.dash-container .breadcrumb {
+    margin-left: 25px;
+}
+
+.dash-container .breadcrumb-date {
+    margin-right: 25px;
+}
+
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+}
+
+.card-container {
+    margin-left: 25px;
+    margin-top: 30px;
+}
+
+.card-container .card-header .circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.card-container .card-header .circle-group {
+    display: flex;
+    gap: 5px;
+}
+
+.container-search-data {
+    margin-top: 50px;
+    margin-left: 10px;
+
+}
+
+.container-table-data {
+    margin-top: 80px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.table .thead-custom th {
+    background-color: #2A9D8F;
+    color: #ffffff;
+    border: 1px solid #2A9D8F;
+}
+
+.table tbody th {
+    border: 1px solid #2A9D8F;
+}
+
+.table tbody td {
+    border: 1px solid #2A9D8F;
+}
+
+.table th,
+.table td {
+    text-align: center;
+}
+
+.container-search-tanggal {
+    margin-top: 50px;
+    margin-left: 10px;
+
+}
+
+.container-table-laporan {
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.container-recap {
+    margin-top: 100px;
+    margin-left: 15px;
+    margin-right: 15px;
+    color: #134A43;
+}
+
+.btn-warning {
+    margin-right: 15px;
+    color: #fff;
+    background-color: #F4A261;
+}
+
+.btn-warning:hover {
+    background-color: #ff922b;
+    color: #fff;
+    /* warna saat hover */
+}
+
+.container-input-grup {
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.container-input-transaksi {
+    color: #134A43;
+}
+
+.container-table-transaksi{
+    margin-top: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.container-recap-transaksi {
+    margin-top: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    color: #134A43;
+}
+
+.btn-warning-struk {
+    margin-right: 15px;
+    color: #fff;
+    background-color: #F4A261;
+    margin-top: 20px;
+}
+
+.btn-warning-struk:hover {
+    background-color: #ff922b;
+    color: #fff;
+    /* warna saat hover */
+}
+
