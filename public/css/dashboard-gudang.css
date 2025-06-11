@@ -1,0 +1,124 @@
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background-color: #34495E;
+  width: 230px;
+  padding: 15px 0;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header-sidebar .list-item {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.brand {
+  color: #FFFFFF;
+  font-weight: bolder;
+  font-size: 30px;
+  align-items: end;
+  display: block;
+}
+
+.main-sidebar .list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-left: 20px;
+  margin: 20px 0px 500px 0px;
+}  
+
+.main-sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: background 0.2s ease-in-out;
+}
+
+.main-sidebar a:hover {
+  background-color: #FFFFFF;
+  color: #34495E;
+  border-radius: 10px;
+  border-right: 20px;
+}
+
+.navbar {
+  flex-direction: row;
+  background-color: #3D6184;
+  width: 100%;
+  height: 40px;
+  flex: 1;
+}
+
+.main-navbar {
+  background-color: #3D6184;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.judul-menu {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.notifikasi {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.notifikasi .notif {
+  color: #F4A261;
+}
+
+.akun {
+  display: flex;
+  align-items: center;
+}
+
+.list-akun {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.pp {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.nama-akun {
+  font-weight: 500;
+}
+
+.dropdown-akun i {
+  color: #333;
+}

@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('umum.login');
 });
 
+Route::get('/gudang-layout', function () {
+    return view('gudang.layout-gudang');
+});
+
 Route::post('/login', function (Request $request) {
     $username = $request->input('username');
     $password = $request->input('password');
