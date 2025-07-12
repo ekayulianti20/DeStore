@@ -2,89 +2,126 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeStore</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeStore</title>
 
-  <!-- Fonts Google -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- My Style -->
-  <link rel="stylesheet" href="{{  asset('css/dashboard-gudang.css') }}">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Feather Icon -->
-  <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- My Style -->
+    <link rel="stylesheet" href="{{ asset('css/gudang.css') }}">
 </head>
 
 <body>
-
-  <!-- Sidebar -->
-  <div class="container">
-
-    <div class="sidebar">
-      <div class="header-sidebar">
-        <div class="list-item">
-          <a href="a">
-            <img src="" alt="" class="logo">
-            <span class="brand">DeStore</span>
-          </a>
-        </div>
-      </div>
-      <div class="main-sidebar">
-        <div class="list-item">
-          <a href="#">
-            <img src="" alt="" class="dashboard-gudang">
-            <span class="dashboard-g">Dashboard</span>
-          </a>
-          <a href="#">
-            <img src="" alt="" class="dataproduk-gudang">
-            <span class="dataproduk-g">Data Produk</span>
-          </a>
-          <a href="#">
-            <img src="" alt="" class="riwayatmutasi-gudang">
-            <span class="riwayatmutasi-g">Riwayat Mutasi</span>
-          </a>
-          <a href="#">
-            <img src="" alt="" class="laporan-gudang">
-            <span class="laporan-g">Laporan Gudang</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="navbar">
-      <div class="main-navbar">
-        <div class="list-navbar">
-          <div class="menu">
-            <i data-feather="menu"></i>
-            <span class="judul-menu">Dashboard</span>
-          </div>
-        </div>
-      <div class="notifikasi">
-        <div class="notif">
-          <i data-feather="bell"></i>
-        </div>
-        <div class="akun">
-          <div class="list-akun">
-            <img src="" alt="" class="pp">
-            <span class="nama-akun">Gudang</span>
-            <div class="dropdown-akun">
-              <i data-feather="chevron-down"></i>
+    <div class="container-fluid">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="header-sidebar">
+                <div>
+                    <img src="{{ asset('img/logo2.png') }}" alt="logo" class="logo">
+                </div>
+                <div class="nama">DeStore</div>
             </div>
-          </div>
+            <div>
+                <ul class="list-sidebar">
+                    <li class="sidebar-dashboard">
+                        <a href="{{ url('/dashboard-gudang') }}"
+                            class="link-sidebar {{ request()->is('dashboard-gudang') ? 'active' : '' }}">
+                            <img src="{{ asset('img/home-putih.png') }}" class="logo-sidebar">
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-dataproduk">
+                        <a href="{{ url('/data-produk') }}"
+                            class="link-sidebar {{ request()->is('data-produk') ? 'active' : '' }}">
+                            <img src="{{ asset('img/data.svg') }}" class="logo-sidebar">
+                            <span>Data Produk</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-riwayatmutasi">
+                        <a href="{{ url('/riwayat-mutasi') }}"
+                            class="link-sidebar {{ request()->is('riwayat-mutasi') ? 'active' : '' }}">
+                            <img src="{{ asset('img/riwayat-mutasi.png') }}" class="logo-sidebar">
+                            <span>Riwayat Mutasi</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-laporan">
+                        <a href="{{ url('/laporan-gudang') }}"
+                            class="link-sidebar {{ request()->is('laporan-gudang') ? 'active' : '' }}">
+                            <img src="{{ asset('img/lap-kasir.svg') }}" class="logo-sidebar">
+                            <span>Laporan Gudang</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-      </div>
 
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Navbar -->
+            <div class="navbar">
+                <div class="menu">
+                    <i data-feather="menu"></i>
+                    <span>@yield('title', 'Dashboard')</span>
+                </div>
+                <div class="navbar-kanan d-flex align-items-center gap-3">
+                    <img src="{{ asset('img/bell.svg') }}" alt="notif" class="notif">
+                    <div class="akun">
+                        <div class="container-akun d-flex align-items-center gap-2">
+                            <img src="{{ asset('img/acc.png') }}" alt="pp" class="pp">
+                            <span class="role">Gudang</span>
+                            <div class="dropdown">
+                                <i data-feather="chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <div class="content-atas d-flex justify-content-between align-items-center mb-3">
+                    <div class="content-kiri d-flex align-items-center">
+                        <div class="apk"><span>DeStore</span></div>
+                        <div class="next mx-2"><i data-feather="chevron-right"></i></div>
+                        <div class="menu-content"><span>@yield('title', 'Dashboard')</span></div>
+                    </div>
+                    <div class="content-kanan d-flex align-items-center gap-2">
+                        <div class="ikon-calendar"><i data-feather="calendar"></i></div>
+                        <div class="kalender" id="tanggal"></div>
+                    </div>
+                </div>
+
+                {{-- Konten --}}
+                @yield('content')
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    feather.replace();
-  </script>
+    <!-- Bootstrap Bundle JS (with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Feather Icons Replace -->
+    <script>
+        feather.replace();
+
+        // Tanggal Hari Ini
+        const tanggal = new Date();
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        document.getElementById("tanggal").textContent = tanggal.toLocaleDateString("id-ID", options);
+    </script>
 </body>
 
 </html>
