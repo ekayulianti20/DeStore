@@ -3,7 +3,7 @@
 @section('title', 'Transaksi')
 
 @section('content')
-    `
+
     <div class="container-input-grup">
         <div class="container-input-transaksi">
             <div class="row text-start">
@@ -14,18 +14,25 @@
 
                 <div class="col-md-6 d-flex align-items-end">
                     <div class="w-100">
-                        <label class="fw-bold">ID Produk :</label>
+                        <label class="fw-bold">Pilih Produk :</label>
                         <div class="input-group">
-                            <input type="text" class="form-control border border-success" />
-                            <span class="input-group-text bg-white border-success">
-                                <i class="bi bi-caret-down-fill"></i>
-                            </span>
+                            <select id="produkSelect" class="form-select border border-success">
+                                <option selected disabled>Pilih Produk</option>
+                                @foreach ($produk as $p)
+                                    <option value="{{ $p->id_produk }}" data-nama="{{ $p->nama_produk }}"
+                                        data-harga="{{ $p->harga_satuan }}">
+                                        {{ $p->id_produk }} - {{ $p->nama_produk }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <button class="btn ms-2" style="background-color: #2A9D8F; color: white; height: 38px;">
+                    <button onclick="tambahProduk()" class="btn ms-2"
+                        style="background-color: #2A9D8F; color: white; height: 38px;">
                         <i class="bi bi-arrow-right"></i>
                     </button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -42,19 +49,7 @@
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>001</td>
-                    <td>Kaos Ukuran XL</td>
-                    <td>50000</td>
-                    <td>10</td>
-                    <td>500000</td>
-                    <td>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
+            <tbody id="tabelTransaksiBody">
             </tbody>
         </table>
         <!-- Bootstrap Pagination -->
@@ -84,15 +79,13 @@
             <!-- Kolom 1: Jumlah Transaksi -->
             <div class="col-md-4">
                 <label class="fw-bold">Total Belanja :</label>
-                <input type="text" id="jumlahTransaksi" class="form-control border border-success mt-1"
-                    placeholder="0" />
+                <input type="text" id="jumlahTransaksi" class="form-control border border-success mt-1" placeholder="0" />
             </div>
 
             <!-- Kolom 2: Pendapatan -->
             <div class="col-md-4">
                 <label class="fw-bold">Nominal Uang :</label>
-                <input type="text" id="totalPendapatan" class="form-control border border-success mt-1"
-                    placeholder="Rp." />
+                <input type="text" id="totalPendapatan" class="form-control border border-success mt-1" placeholder="Rp." />
             </div>
 
             <!-- Kolom 3: Keuntungan -->
@@ -103,8 +96,13 @@
         </div>
     </div>
 
+    <!-- Tombol Cetak -->
     <div class="d-flex justify-content-end">
-        <button class="btn btn-warning-struk fw-bold">Cetak Struk</button>
+        <form id="formStruk" action="{{ route('kasir.struk') }}" method="POST" target="_blank">
+            @csrf
+            <input type="hidden" name="id_transaksi" id="id_transaksi_hidden">
+            <button type="button" class="btn btn-warning-struk fw-bold" onclick="printStruk()">Cetak Struk</button>
+        </form>
     </div>
 
     <!-- Modal Delete -->
@@ -128,25 +126,184 @@
 
     <!-- Script untuk memunculkan date input saat kotak search diklik -->
     <script>
+        let cartItems = [];
+        let currentPage = 1;
+        const itemsPerPage = 2;
+
+        function renderTable() {
+            const tbody = document.getElementById('tabelTransaksiBody');
+            tbody.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const currentItems = cartItems.slice(startIndex, endIndex);
+
+            currentItems.forEach((item, index) => {
+                tbody.innerHTML += `
+                        <tr>
+                            <td>${item.id_produk}</td>
+                            <td>${item.nama_produk}</td>
+                            <td>Rp ${item.harga_satuan.toLocaleString()}</td>
+                            <td>${item.jumlah_beli}</td>
+                            <td>Rp ${item.sub_total.toLocaleString()}</td>
+                            <td>
+                                <button class='btn btn-danger btn-sm' onclick='hapusItem(${startIndex + index})'>
+                                    <i class='bi bi-trash'></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+            });
+
+            renderPagination();
+            updateTotal();
+            hitungKembalian();
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(cartItems.length / itemsPerPage);
+            const paginationContainer = document.querySelector('.pagination');
+            paginationContainer.innerHTML = '';
+
+            // Previous
+            paginationContainer.innerHTML += `
+                    <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                        <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+                    </li>`;
+
+            for (let i = 1; i <= totalPages; i++) {
+                paginationContainer.innerHTML += `
+                        <li class="page-item ${currentPage === i ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                        </li>`;
+            }
+
+            // Next
+            paginationContainer.innerHTML += `
+                    <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                        <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+                    </li>`;
+        }
+
+        function changePage(page) {
+            const totalPages = Math.ceil(cartItems.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderTable();
+        }
+
+        function tambahProduk() {
+            const select = document.getElementById('produkSelect');
+            const id_produk = select.value;
+            const nama_produk = select.options[select.selectedIndex].dataset.nama;
+            const harga_satuan = parseFloat(select.options[select.selectedIndex].dataset.harga);
+
+            if (!id_produk) return alert('Pilih produk terlebih dahulu!');
+            if (isNaN(harga_satuan)) return alert('Harga produk tidak valid!');
+
+            const jumlah_beli = parseInt(prompt(`Masukkan jumlah beli untuk ${nama_produk}`));
+            if (!jumlah_beli || isNaN(jumlah_beli)) return alert('Jumlah beli tidak valid!');
+
+            const existingIndex = cartItems.findIndex(item => item.id_produk === id_produk);
+
+            if (existingIndex !== -1) {
+                // Produk sudah ada → tambahkan jumlah dan subtotal
+                cartItems[existingIndex].jumlah_beli += jumlah_beli;
+                cartItems[existingIndex].sub_total = cartItems[existingIndex].harga_satuan * cartItems[existingIndex].jumlah_beli;
+            } else {
+                // Produk baru
+                const sub_total = harga_satuan * jumlah_beli;
+                cartItems.push({ id_produk, nama_produk, harga_satuan, jumlah_beli, sub_total });
+            }
+
+            renderTable();
+        }
+
+        function updateTotal() {
+            let total = cartItems.reduce((sum, item) => sum + item.sub_total, 0);
+            document.getElementById('jumlahTransaksi').value = `Rp ${total.toLocaleString()}`;
+        }
+
+        function hitungKembalian() {
+            const totalStr = document.getElementById('jumlahTransaksi').value.replace(/[^0-9]/g, '');
+            const total = parseFloat(totalStr) || 0;
+            const nominal = parseFloat(document.getElementById('totalPendapatan').value) || 0;
+            const kembalian = nominal - total;
+            document.getElementById('keuntungan').value = `Rp ${kembalian >= 0 ? kembalian.toLocaleString() : 0}`;
+        }
+
+        const totalInput = document.getElementById('totalPendapatan');
+        if (totalInput) {
+            totalInput.addEventListener('input', hitungKembalian);
+        }
+
+        function hapusItem(index) {
+            cartItems.splice(index, 1);
+            renderTable();
+        }
+
+        function printStruk() {
+            const totalStr = document.getElementById('jumlahTransaksi').value.replace(/[^0-9]/g, '');
+            const totalBelanja = parseFloat(totalStr);
+            const nominalUang = parseFloat(document.getElementById('totalPendapatan').value);
+            const kembalianStr = document.getElementById('keuntungan').value.replace(/[^0-9]/g, '');
+            const kembalian = parseFloat(kembalianStr);
+
+            if (cartItems.length === 0) {
+                alert('Belum ada produk yang ditambahkan!');
+                return;
+            }
+
+            fetch("{{ route('kasir.transaksi.store') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    total_harga: totalBelanja,
+                    nominal_uang: nominalUang,
+                    kembalian: kembalian,
+                    produk: cartItems
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('RESPON TRANSAKSI:', data); // <-- Debug penting
+                    if (data.success && data.id_transaksi) {
+                        document.getElementById('id_transaksi_hidden').value = data.id_transaksi;
+
+                        setTimeout(() => {
+                            document.getElementById('formStruk').submit();
+                            setTimeout(() => location.reload(), 1500);
+                        }, 300); // pastikan nilai masuk dulu sebelum submit
+                    } else {
+                        alert("Gagal menyimpan transaksi: " + (data.error ?? 'ID transaksi tidak dikembalikan.'));
+                    }
+                })
+                .catch(err => {
+                    console.error('ERROR FETCH:', err);
+                    alert('Terjadi kesalahan saat menyimpan transaksi!');
+                });
+        }
+
+        // Optional untuk input tanggal
         const searchBox = document.getElementById('searchBox');
         const datePicker = document.getElementById('datePicker');
 
-        searchBox.addEventListener('focus', function() {
-            datePicker.style.display = 'block'; // tampilkan input tanggal saat fokus
-        });
+        if (searchBox) {
+            searchBox.addEventListener('focus', function () {
+                datePicker.style.display = 'block';
+            });
 
-        // Opsional: sembunyikan kembali jika ingin saat kehilangan fokus
-        searchBox.addEventListener('blur', function() {
-            // Tunggu sebentar agar user bisa klik datePicker
-            setTimeout(() => {
-                if (document.activeElement !== datePicker) {
-                    datePicker.style.display = 'none';
-                }
-            }, 200);
-        });
-
-        datePicker.addEventListener('blur', function() {
-            datePicker.style.display = 'none'; // sembunyikan saat datePicker kehilangan fokus
-        });
+            searchBox.addEventListener('blur', function () {
+                setTimeout(() => {
+                    if (document.activeElement !== datePicker) {
+                        datePicker.style.display = 'none';
+                    }
+                }, 200);
+            });
+        }
     </script>
+
 @endsection

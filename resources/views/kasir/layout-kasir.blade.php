@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DeStore</title>
+    <title>DeStore | Kasir</title>
     <link rel="icon" href="{{ asset('img/logo2.png') }}" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
@@ -17,6 +17,9 @@
 
     <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -43,7 +46,7 @@
                     </a>
                 </div>
                 <div class="list-item">
-                    <a href="{{ route('kasir.data-produk-kasir') }}">
+                    <a href="{{ route('kasir.data-produk-kasir.index') }}">
                         <img src={{ asset('img/data.svg') }} alt="" class="icon-default">
                         <img src={{ asset('img/data2.svg') }} alt="" class="icon-hover">
                         <span class="description">Data Produk</span>
@@ -57,7 +60,7 @@
                     </a>
                 </div>
                 <div class="list-item">
-                    <a href="{{ route('kasir.laporan-kasir') }}">
+                    <a href="{{ route('kasir.laporan.index') }}">
                         <img src={{ asset('img/lap-kasir.svg') }} alt="" class="icon-default">
                         <img src={{ asset('img/lap-kasir2.svg') }} alt="" class="icon-hover">
                         <span class="description">Laporan Kasir</span>
@@ -101,7 +104,8 @@
 
                     <ol class="breadcrumb mb-0 me-auto">
                         <li class="breadcrumb-item"><a href="#">Kasir</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><span>@yield('title', 'Dashboard')</span></li>
+                        <li class="breadcrumb-item active" aria-current="page"><span>@yield('title', 'Dashboard')</span>
+                        </li>
                     </ol>
 
                     <ol class="breadcrumb breadcrumb-date mb-0">
@@ -118,7 +122,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
-    </script>
+        </script>
 
     <script>
         const today = new Date();

@@ -4,61 +4,45 @@
 
 @section('content')
 
-    <div class="card-wrapper">
-        <div class="card-container">
-            <div class="card border-danger mb-3" style="max-width: 30rem; min-height: 10rem;">
-                <div class="card-header border-danger d-flex align-items-center justify-content-between">
-                    <div class="circle-group">
-                        <span class="circle bg-danger"></span>
-                        <span class="circle bg-warning"></span>
-                        <span class="circle bg-success"></span>
-                    </div>
-                    <h5 class="mb-0">Produk Masuk</h5>
-                </div>
-                <div class="card-body text-secondary">
-                    <h5 class="card-title">Secondary card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        cards
-                        content.</p>
-                </div>
+@section('content')
+
+    <div class="container-dashboard">
+        <div class="card-dashboard masuk">
+            <div class="icon"><i class="fas fa-boxes"></i></div>
+            <div class="info">
+                <h3 id="produkMasuk"></h3>
+                <p>Produk Masuk</p>
             </div>
         </div>
-        <div class="card-container">
-            <div class="card border-primary mb-3" style="max-width: 30rem; min-height: 10rem;">
-                <div class="card-header border-danger d-flex align-items-center justify-content-between">
-                    <div class="circle-group">
-                        <span class="circle bg-danger"></span>
-                        <span class="circle bg-warning"></span>
-                        <span class="circle bg-success"></span>
-                    </div>
-                    <h5 class="mb-0">Produk Keluar</h5>
-                </div>
-                <div class="card-body text-secondary">
-                    <h5 class="card-title">Secondary card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        cards
-                        content.</p>
-                </div>
+
+        <div class="card-dashboard keluar">
+            <div class="icon"><i class="fas fa-dolly-flatbed"></i></div>
+            <div class="info">
+                <h3 id="produkKeluar"></h3>
+                <p>Produk Keluar</p>
             </div>
         </div>
-        <div class="card-container">
-            <div class="card border-success mb-3" style="max-width: 30rem; min-height: 10rem;">
-                <div class="card-header border-danger d-flex align-items-center justify-content-between">
-                    <div class="circle-group">
-                        <span class="circle bg-danger"></span>
-                        <span class="circle bg-warning"></span>
-                        <span class="circle bg-success"></span>
-                    </div>
-                    <h5 class="mb-0">Total Produk</h5>
-                </div>
-                <div class="card-body text-secondary">
-                    <h5 class="card-title">Secondary card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        cards
-                        content.</p>
-                </div>
+
+        <div class="card-dashboard total">
+            <div class="icon"><i class="fas fa-database"></i></div>
+            <div class="info">
+                <h3 id="totalProduk"></h3>
+                <p>Total Produk</p>
             </div>
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script>
+        // Simulasi data dari backend
+        const totalStok = {{ $stok }};
+        const totalTerjual = {{ $jumlah_beli }};
+        const totalDataProduk = {{ $id_produk }};
+
+        document.getElementById("produkMasuk").innerText = totalStok;
+        document.getElementById("produkKeluar").innerText = totalStok - totalTerjual;
+        document.getElementById("totalProduk").innerText = totalDataProduk;
+    </script>
 @endsection

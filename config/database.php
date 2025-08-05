@@ -42,6 +42,20 @@ return [
             'synchronous' => null,
         ],
 
+        'admin' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'), // karena ini default DB
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'admin_destore'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'gudang' => [
             'driver' => env('DB_GUDANG_CONNECTION', 'mysql'),
             'host' => env('DB_GUDANG_HOST', '127.0.0.1'),

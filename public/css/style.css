@@ -248,7 +248,7 @@ body {
 }
 
 .container-recap {
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 15px;
     margin-right: 15px;
     color: #134A43;
@@ -276,7 +276,7 @@ body {
     color: #134A43;
 }
 
-.container-table-transaksi{
+.container-table-transaksi {
     margin-top: 50px;
     margin-left: 15px;
     margin-right: 15px;
@@ -302,3 +302,219 @@ body {
     /* warna saat hover */
 }
 
+/* Admin */
+
+.card-wrapper {
+    display: flex;
+    gap: 80px;
+    margin: 40px;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    width: 300px;
+    height: 150px;
+    padding: 20px;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card-title {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.card-masuk {
+    color: #F4A261;
+    background-image: url('/img/bg-produk-masuk.png');
+}
+
+.card-keluar {
+    color: #3D6184;
+    background-image: url('/img/bg-produk-keluar.png');
+}
+
+.card-total {
+    color: #FFFFFF;
+    background-image: url('/img/bg-total-produk.png');
+}
+
+
+.card-pengguna {
+    color: #3D6184;
+    background-image: url('/img/bg-produk-keluar.png');
+}
+
+.card-data-produk {
+    color: #FFFFFF;
+    background-image: url('/img/bg-total-produk.png');
+}
+
+.card-laporan {
+    color: #F4A261;
+    background-image: url('/img/bg-produk-masuk.png');
+}
+
+.btn-warning-user {
+    margin-right: 15px;
+    margin-top: 40px;
+    color: #fff;
+    background-color: #ff922b;
+}
+
+.btn-warning:hover {
+    background-color: #ff922b;
+    color: #fff;
+    /* warna saat hover */
+}
+
+.container-table-user {
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.table-container,
+.info {
+    padding: 20px;
+}
+
+#tabelProduk {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    width: 95%;
+    margin-left: 20px;
+}
+
+#tabelProduk thead th {
+    font-weight: 600;
+    background-color: #2A9D8F;
+    color: #FFFFFF;
+    border: 1px solid #134A43;
+}
+
+#tabelProduk td {
+    vertical-align: middle;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 1px solid #2A9D8F;
+}
+
+#tabelLapGudang {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+}
+
+#tabelLapGudang thead th {
+    font-weight: 600;
+    background-color: #2A9D8F;
+    color: #FFFFFF;
+    border: 1px solid #134A43;
+}
+
+
+#tabelLapGudang td {
+    vertical-align: middle;
+    padding: 5px;
+    border: 1px solid #2A9D8F;
+}
+
+#inputPencarian,
+#tanggalMutasi,
+#produkMasuk,
+#produkKeluar,
+#totalProduk {
+    border-radius: 10px;
+    border: 1px solid #2A9D8F;
+}
+
+/* Riwayat Mutasi */
+.pencarian-tanggal {
+    padding: 20px;
+}
+
+/* Data Produk */
+.btn-tambah,
+.btn-cetak {
+    background-color: #F4A261;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.btn-tambah:hover,
+.btn-cetak:hover {
+    background-color: #F4A261;
+}
+
+.container-dashboard {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.card-dashboard {
+    flex: 1;
+    min-width: 250px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.card-dashboard:hover {
+    transform: translateY(-5px);
+}
+
+.card-dashboard .icon {
+    font-size: 35px;
+    margin-right: 15px;
+    color: #3498db;
+}
+
+.card-dashboard.masuk .icon { color: #3498db; }
+.card-dashboard.keluar .icon { color: #e67e22; }
+.card-dashboard.total .icon { color: #2ecc71; }
+
+.card-dashboard.masuk {
+    border-top: 10px solid #23752e;
+    margin-left: 110px;
+}
+
+.card-dashboard.total {
+    border-top: 10px solid #3498db;
+    margin-right: 110px;
+}
+
+.card-dashboard.keluar {
+    border-top: 10px solid #ca6a10;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.card-dashboard .info h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #9d2a2a;
+}
+
+.card-dashboard .info p {
+    margin: 5px 0 0;
+    color: #7f8c8d;
+    font-size: 14px;
+}

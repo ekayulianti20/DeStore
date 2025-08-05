@@ -312,8 +312,13 @@ body {
     padding: 20px;
 }
 
+
+#tabelMutasi{
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+}
+
 #tabelProduk,
-#tabelMutasi,
 #tabelLapGudang {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-size: 0.95rem;
@@ -408,6 +413,64 @@ body {
     color: #000000;
 }
 
-.row.align-items-center > div {
+.container-dashboard {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
 
+.card-dashboard {
+    flex: 1;
+    min-width: 250px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.card-dashboard:hover {
+    transform: translateY(-5px);
+}
+
+.card-dashboard .icon {
+    font-size: 35px;
+    margin-right: 15px;
+    color: #3498db;
+}
+
+.card-dashboard.masuk .icon { color: #3498db; }
+.card-dashboard.keluar .icon { color: #e67e22; }
+.card-dashboard.total .icon { color: #2ecc71; }
+
+.card-dashboard.masuk {
+    border-top: 10px solid #23752e;
+    margin-left: 110px;
+}
+
+.card-dashboard.total {
+    border-top: 10px solid #3498db;
+    margin-right: 110px;
+}
+
+.card-dashboard.keluar {
+    border-top: 10px solid #ca6a10;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.card-dashboard .info h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #9d2a2a;
+}
+
+.card-dashboard .info p {
+    margin: 5px 0 0;
+    color: #7f8c8d;
+    font-size: 14px;
 }

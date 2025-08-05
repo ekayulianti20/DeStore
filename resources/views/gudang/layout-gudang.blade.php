@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeStore</title>
+    <title>DeStore | Gudang</title>
+    <link rel="icon" href="{{ asset('img/logo2.png') }}" type="image/png">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,6 +15,9 @@
 
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- My Style -->
     <link rel="stylesheet" href="{{ asset('css/gudang.css') }}">
@@ -39,22 +43,22 @@
                         </a>
                     </li>
                     <li class="sidebar-dataproduk">
-                        <a href="{{ url('/data-produk') }}"
-                            class="link-sidebar {{ request()->is('data-produk') ? 'active' : '' }}">
+                        <a href="{{ url('/gudang/data-produk-asli') }}"
+                            class="link-sidebar {{ request()->is('/gudang/data-produk-asli') ? 'active' : '' }}">
                             <img src="{{ asset('img/data.svg') }}" class="logo-sidebar">
                             <span>Data Produk</span>
                         </a>
                     </li>
                     <li class="sidebar-riwayatmutasi">
-                        <a href="{{ url('/riwayat-mutasi') }}"
-                            class="link-sidebar {{ request()->is('riwayat-mutasi') ? 'active' : '' }}">
+                        <a href="{{ url('gudang/riwayat-mutasi') }}"
+                            class="link-sidebar {{ request()->is('/gudang/riwayat-mutasi') ? 'active' : '' }}">
                             <img src="{{ asset('img/riwayat-mutasi.png') }}" class="logo-sidebar">
                             <span>Riwayat Mutasi</span>
                         </a>
                     </li>
                     <li class="sidebar-laporan">
-                        <a href="{{ url('/laporan-gudang') }}"
-                            class="link-sidebar {{ request()->is('laporan-gudang') ? 'active' : '' }}">
+                        <a href="{{ url('/gudang/laporan-gudang') }}"
+                            class="link-sidebar {{ request()->is('/gudang/laporan-gudang') ? 'active' : '' }}">
                             <img src="{{ asset('img/lap-kasir.svg') }}" class="logo-sidebar">
                             <span>Laporan Gudang</span>
                         </a>
@@ -73,16 +77,24 @@
                 </div>
                 <div class="navbar-kanan d-flex align-items-center gap-3">
                     <img src="{{ asset('img/bell.svg') }}" alt="notif" class="notif">
-                    <div class="akun">
-                        <div class="container-akun d-flex align-items-center gap-2">
+
+                    <div class="akun dropdown">
+                        <div class="container-akun d-flex align-items-center gap-3 dropdown-toggle"
+                            data-bs-toggle="dropdown" role="button" aria-expanded="false">
                             <img src="{{ asset('img/acc.png') }}" alt="pp" class="pp">
                             <span class="role">Gudang</span>
-                            <div class="dropdown">
-                                <i data-feather="chevron-down"></i>
-                            </div>
                         </div>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Keluar Sebagai Gudang</button>
+                            </form>
+                        </ul>
+
                     </div>
                 </div>
+
             </div>
 
             <!-- Content -->

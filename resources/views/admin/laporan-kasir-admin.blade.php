@@ -1,9 +1,8 @@
-@extends('kasir.layout-kasir')
+@extends('admin.layout-admin')
 
-@section('title', 'Laporan Kasir')
+@section('title', 'Laporan Kasir Admin')
 
 @section('content')
-
     <div class="container-search-tanggal">
         <nav class="navbar">
             <div class="col-md-3">
@@ -154,17 +153,17 @@
                     tbody.innerHTML = '';
                     res.data.forEach((item, index) => {
                         tbody.innerHTML += `
-                                        <tr>
-                                            <td>${index + 1}</td>
-                                            <td>${item.id_detail}</td>
-                                            <td>${item.tanggal_transaksi}</td>
-                                            <td>${item.id_produk}</td>
-                                            <td>${item.nama_produk}</td>
-                                            <td>${item.jumlah_beli}</td>
-                                            <td>${item.sub_total}</td>
-                                        </tr>
-                                    `;
-                    });
+                                                <tr>
+                                                    <td>${index + 1}</td>
+                                                    <td>${item.id_detail}</td>
+                                                    <td>${item.tanggal_transaksi}</td>
+                                                    <td>${item.id_produk}</td>
+                                                    <td>${item.nama_produk}</td>
+                                                    <td>${item.jumlah_beli}</td>
+                                                    <td>${item.sub_total}</td>
+                                                </tr>
+                                            `;
+                        });
 
 
                     document.getElementById('jumlahTransaksi').value = res.jumlah_transaksi;
@@ -188,7 +187,5 @@
             return 'Rp ' + angka.toLocaleString('id-ID');
         }
     </script>
-
-
 
 @endsection

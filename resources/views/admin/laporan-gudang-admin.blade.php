@@ -1,4 +1,4 @@
-@extends ('gudang.layout-gudang')
+@extends ('admin.layout-admin')
 
 @section('title','Laporan Gudang')
 
